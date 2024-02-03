@@ -1,0 +1,38 @@
+.headerMainWrap {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 90px;
+    padding: 20px 0;
+    background-color: #F5F5F5;
+    color: #000;
+    font-size: 30px;
+    text-align: center;
+    margin: 0px;
+    box-sizing: border-box;
+    line-height: 1;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 0px 8px -2px rgba(0,0,0,.2);
+    z-index: 1;
+}
+
+.menuWrap{
+    font-size: 15px;
+    width: 30%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    
+    .material-icons{
+        font-size: 30px;
+    }
+}
+
+.logoWrap{
+    width: 70%;
+    padding-right: 30%;
+    img{
+        max-width: 150px;
+    }
+}

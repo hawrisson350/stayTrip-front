@@ -1,0 +1,16 @@
+.container{
+    float: left;
+    width: 80%;
+    padding: 15px;
+    box-sizing: border-box;
+    margin:90px 10% 0;
+    background-color: #fefefe;
+    min-height: calc(100vh - 130px);
+}
+
+st-top-bar,
+st-footer{
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+}
