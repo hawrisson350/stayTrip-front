@@ -1,0 +1,125 @@
+%font {
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 15px;
+}
+
+$primary: #FFDD00;
+$secondary: #1B2D54;
+$errorColor: #B00020;
+$successColor: #03DAC6;
+$darkColor: #0D0D0D;
+$disableColor: #999;
+
+.st-form-field {
+    border: none;
+    margin: 0;
+    padding: 0 10px;
+    display: inline-block;
+    min-width: 200px;
+    width: 100%;
+
+    &__container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__errors-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__label {
+        color: $darkColor;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 10px 0;
+        pointer-events: none;
+    }
+
+    &__label--required:after {
+        content: ' *';
+    }
+
+    .st-form-field__input {
+        width: 100%;
+        border-radius: 7px;
+        border: 1px solid;
+        border-color:  $darkColor;
+        padding: 15px 10px;
+        outline: 0;
+        background-color: white;
+        color: $darkColor;
+        font-size: 15px;
+    }
+
+    input[type="date"], input[type="time"] {
+        @extend %font;
+     }
+
+    select[stInput] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image:
+            linear-gradient(45deg, transparent 50%, gray 50%),
+            linear-gradient(135deg, gray 50%, transparent 50%),
+            none;
+        background-position: calc(100% - 15px) calc(1.3em + 0px), calc(100% - 10px) calc(1.3em + 0px), calc(100% - 2.5em) 0.5em;
+        background-size:
+            5px 5px,
+            5px 5px,
+            1px 1.5em;
+        background-repeat: no-repeat;
+        color: grey;
+    }
+
+    &--selected {
+        .st-form-field__input {
+            border-color: $secondary;
+            transition: border-color 0.3s;
+        }
+    }
+
+    &--focused {
+        .st-form-field__input {
+            border-color: $primary;
+            transition: border-color 0.3s;
+        }
+    }
+
+    &--disabled {
+        .st-form-field__label {
+            color: $disableColor;
+        }
+
+        .st-form-field__input {
+            cursor: not-allowed;
+            border-color: $disableColor;
+            background-color: #BBB;
+
+            &::placeholder {
+                color: $disableColor;
+                -webkit-text-fill-color: $disableColor;
+            }
+        }
+    }
+
+    .st-form-field__error {
+        @extend %font;
+        color: $errorColor;
+    }
+
+    &--error {
+        .st-form-field__input {
+            border-color: $errorColor;
+            transition: border-color 0.3s;
+        }
+
+        .st-form-field__label {
+            color: $errorColor;
+            transition: color 0.3s;
+        }
+    }
+}

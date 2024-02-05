@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormFieldModule } from './form-field/form-field.module';
-// import { ButtonsModule } from './buttons/buttons.module';
-// import { AlertModule } from './alert/alert.module';
+import { FormFieldModule } from './form-field/form-field.module';
+import { ButtonsModule } from './buttons/buttons.module';
+import { AlertModule } from './alert/alert.module';
 
 
 @NgModule({
@@ -11,9 +11,9 @@ import { CommonModule } from '@angular/common';
     CommonModule,
   ],
   exports:[
-    // FormFieldModule,
-    // ButtonsModule,
-    // AlertModule,
+    FormFieldModule,
+    ButtonsModule,
+    AlertModule,
   ]
 })
 export class SharedModule { }

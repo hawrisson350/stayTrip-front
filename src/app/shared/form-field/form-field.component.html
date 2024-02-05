@@ -1,0 +1,10 @@
+<div class="st-form-field__container">
+    <ng-content select="[stIcon]"></ng-content>
+    <ng-content select="[stLabel]"></ng-content>
+    <ng-content select="[stInput]"></ng-content>
+</div>
+<ng-container *ngIf="showError">
+    <div class="st-form-field__errors-container">
+        <ng-content select="st-error"></ng-content>
+    </div>
+</ng-container>

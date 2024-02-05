@@ -1,0 +1,55 @@
+$primary: #FFDD00;
+$secondary: #1E2C3A;
+$errorColor: #B00020;
+$successColor: #03DAC6;
+$darkColor: #0D0D0D;
+$grayColor: #EAECF2;
+$disableColor: #999;
+
+.st-button {
+  &:host {
+    border: none;
+    border-radius: 4px;
+    color: $secondary;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    line-height: normal;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: 700;
+    justify-content: center;
+    min-width: 130px;
+    font-size:14px ;
+
+    &__md {
+      padding: 0px 31px;
+      height: 32px;
+    }
+
+    &__lg {
+      padding: 0px 26px;
+      height: 37px;
+    }
+
+    &__sm {
+      padding: 0px 10px;
+      height: 28px;
+    }
+
+    &__principal {
+      background-color: $primary;
+    }
+
+    &__dark {
+      background-color: $grayColor;
+    }
+
+    &__disabled {
+      pointer-events: none;
+      background: gray;
+      color: $grayColor;
+      cursor: not-allowed;
+    }
+  }
+}

@@ -1,0 +1,87 @@
+.hotelTableMainWrap {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.titleWrap {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+    padding: 20px 0;
+    font-weight: 800;
+}
+
+.tableMainWrap {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+
+    .tableActionsWrap,
+    .tableFooter {
+        display: inline-flex;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 1500px;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 10px 0;
+
+        .buttonNew {
+            margin-left: auto;
+        }
+
+        .bpi-form-field {
+            min-width: 200px;
+        }
+
+        .filterBtn{
+            min-width: auto;
+            margin-left: 15px;
+        }
+    }
+
+    table {
+        width: 100%;
+        border: none;
+        display: inline-table;
+        max-width: 1500px;
+        border-collapse: collapse;
+    }
+
+    tr {
+        border-bottom: 1px solid #F1F3F6;
+    }
+
+    th {
+        background-color: #F9FAFC;
+        font-weight: 700;
+    }
+
+    th,
+    td {
+        padding: 20px;
+        text-align: left;
+        border: none;
+        width: calc((100% / 4) - 100px);
+    }
+
+    td.void {
+        text-align: center;
+
+    }
+}
+
+.logoInTable {
+    width: 100%;
+    height: auto;
+    max-width: 50px;
+    max-height: 100px;
+}

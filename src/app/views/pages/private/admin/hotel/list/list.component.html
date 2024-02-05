@@ -1,0 +1,90 @@
+<div class="hotelTableMainWrap">
+    <div class="titleWrap">
+        <h1>Lista de hoteles</h1>
+    </div>
+
+
+    <div class="tableMainWrap" cellspacing="0" cellpadding="0">
+        <div class="tableActionsWrap">
+            <button class="buttonNew" stButton size="lg" variant="principal" routerLink="./form">Agregar</button>
+        </div>
+        <!-- <div class="tableActionsWrap">
+            <st-form-field>
+                <input stInput id="id" [type]="typeInput" placeholder="Ingrese su busqueda" [(ngModel)]="searchDataSelected">
+            </st-form-field>
+            <st-form-field>
+                <select stInput name="select" [(ngModel)]="searchCriteriaSelected">
+                    <option value="">Selecciona un criterio</option>
+                    <option value="$name">Nombre</option>
+                    <option value="$description">Descripción</option>
+                    <option value="$date_release">Fecha de liberación</option>
+                    <option value="$date_revision">Fecha de reestructuración</option>
+                </select>
+            </st-form-field>
+            <button class="filterBtn" stButton size="lg" variant="principal" (click)="seachItem()" [disabled]="searchCriteriaSelected ==='' || searchDataSelected===''">
+                <i class="material-icons">search</i>
+            </button>
+            <button class="filterBtn" stButton size="lg" variant="dark" (click)="reseatPaginate()">
+                <i class="material-icons">close</i>
+            </button>
+        </div> -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Ciudad</th>
+                    <th>Departamento</th>
+                    <th>Dirección</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="dataInTable.length; then data; else noItems"></ng-container>
+                <ng-template #data>
+                    @for (item of dataInTable; track $index) {
+                        <tr>
+                            <td>
+                                <img [src]="item.photo" [alt]="item.photo" class="logoInTable">
+                            </td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.city}}</td>
+                            <td>{{item.department}}</td>
+                            <td>{{item.address}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{StatusEnum[item.status]}}</td>
+                            <td>
+                                <a routerLink="./form" [state]=item>
+                                    <i class="material-icons">create</i>
+                                </a>
+
+                                <!-- <a href="javascript:void(0)" (click)="deleteItem(item)">
+                                    <i class="material-icons" >delete</i>
+                                </a> -->
+                            </td>
+                        </tr>
+                    }
+                </ng-template>
+                <ng-template #noItems>
+                    <tr>
+                        <td colspan="6" class="void">No hay registros</td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+        <div class="tableFooter">
+            <div class="textWrap">
+                {{pageSelected}} Resultados
+            </div>
+            <!-- <st-form-field class="buttonNew">
+                <select stInput name="select" [(ngModel)]="pageSelected" (ngModelChange)="changePageSize($event)">
+                    <option *ngFor="let option of pageSizeList" [value]="option">
+                        {{option}}
+                    </option>
+                </select>
+            </st-form-field> -->
+        </div>
+    </div>
+</div>
