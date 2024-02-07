@@ -9,7 +9,7 @@ const routes: Routes = [
         path: '',
         children: [
             { path: '', component: ListComponent },
-            { path: 'form', component: FormComponent },
+            { path: 'form', component: FormComponent }
         ]
     }
 ];

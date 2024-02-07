@@ -4,7 +4,7 @@ export class Hotel {
     private _id: number;
     private _name: string;
     private _city: string;
-    private _department: string;
+    private _department: number;
     private _address: string;
     private _description: string;
     private _rooms: Room[];
@@ -12,7 +12,7 @@ export class Hotel {
     private _status: string;
 
 
-    constructor(id: number, name: string, city: string, department: string, address: string, description: string, rooms: Room[], photo: string, status: string) {
+    constructor(id: number, name: string, city: string, department: number, address: string, description: string, rooms: Room[], photo: string, status: string) {
         this._id = id;
         this._name = name;
         this._city = city;
@@ -51,9 +51,9 @@ export class Hotel {
 
     /**
      * Getter department
-     * @return {string}
+     * @return {number}
      */
-    public get department(): string {
+    public get department(): number {
         return this._department;
     }
 
@@ -123,9 +123,9 @@ export class Hotel {
 
     /**
      * Setter department
-     * @param {string} value
+     * @param {number} value
      */
-    public set department(value: string) {
+    public set department(value: number) {
         this._department = value;
     }
 

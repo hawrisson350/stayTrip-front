@@ -1,1 +1,120 @@
-<p>form works!</p>
+<div class="formMainWrap">
+    <div class="titleWrap">
+        <h1>Formulario de registro</h1>
+    </div>
+
+    <form class="formWrap" [formGroup]="formHotel">
+        <st-form-field>
+            <label stLabel for="name">Nombre</label>
+            <input stInput id="name" type="text" formControlName="name">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="department">Departamento</label>
+            <select stInput id="department" formControlName="department" name="department" id="department">
+                <option selected disabled>Seleccione una opción</option>
+                @for (item of this.colService.Colombia | async; track $index) {
+                <option [ngValue]="item.id">{{item.departamento}}</option>
+                }
+            </select>
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="city">Ciudad</label>
+            <select stInput id="city" formControlName="city" name="city" id="city">
+                <option selected disabled>Seleccione una opción</option>
+                @for (item of this.colService.getCityListByDepartment(this.formHotel.get('department')?.value) | async; track $index) {
+                <option [ngValue]="item">{{item}}</option>
+                }
+            </select>
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+
+        <st-form-field>
+            <label stLabel for="address">Dirección</label>
+            <input stInput id="address" type="text" formControlName="address">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="photo">Foto</label>
+            <input stInput id="photo" type="text" formControlName="photo">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="status">Estado</label>
+            <select stInput id="status" formControlName="status" name="status" id="status">
+                <option selected disabled>Seleccione una opción</option>
+                <option value="A">{{StatusEnum['A']}}</option>
+                <option value="I">{{StatusEnum['I']}}</option>
+            </select>
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="description">Descripción</label>
+            <textarea stInput id="description" type="text" formControlName="description" maxlength="150"></textarea>
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+    </form>
+
+    <div class="tableMainWrap" cellspacing="0" cellpadding="0">
+        <div class="tableActionsWrap">
+            <button class="buttonNew" stButton size="lg" variant="principal" routerLink="./form">Agregar habitación</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Costo base</th>
+                    <th>Impuesto</th>
+                    <th>Tipo</th>
+                    <th>Ubicación</th>
+                    <th>Capacidad</th>
+                    <th>Descripción</th>
+                    <th>¿Disponible?</th>
+                    <th>Estado</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="roomsToEdit.length; then data; else noItems"></ng-container>
+                <ng-template #data>
+                    @for (item of roomsToEdit; track $index) {
+                    <tr>
+                        <td>{{item.baseCost | currency}}</td>
+                        <td>{{item.taxes}}</td>
+                        <td>{{item.type}}</td>
+                        <td>{{item.location}}</td>
+                        <td>{{item.amountPersons}}</td>
+                        <td>{{item.description}}</td>
+                        <td>{{item.available? 'Si': 'No'}}</td>
+                        <td>{{StatusEnum[item.status]}}</td>
+                        <td>
+                            <!-- <a routerLink="./form" [state]=item>
+                                <i class="material-icons">create</i>
+                            </a> -->
+
+                            <!-- <a href="javascript:void(0)" (click)="deleteItem(item)">
+                                    <i class="material-icons" >delete</i>
+                                </a> -->
+                        </td>
+                    </tr>
+                    }
+                </ng-template>
+                <ng-template #noItems>
+                    <tr>
+                        <td colspan="6" class="void">No hay registros</td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+    <div class="buttonsWrap">
+        <button stButton size="lg" variant="dark" routerLink="../">Regresar</button>
+        <button stButton size="lg" variant="principal" (click)="sendDataHotel()">Enviar</button>
+    </div>
+</div>

@@ -45,26 +45,26 @@
                 <ng-container *ngIf="dataInTable.length; then data; else noItems"></ng-container>
                 <ng-template #data>
                     @for (item of dataInTable; track $index) {
-                        <tr>
-                            <td>
-                                <img [src]="item.photo" [alt]="item.photo" class="logoInTable">
-                            </td>
-                            <td>{{item.name}}</td>
-                            <td>{{item.city}}</td>
-                            <td>{{item.department}}</td>
-                            <td>{{item.address}}</td>
-                            <td>{{item.description}}</td>
-                            <td>{{StatusEnum[item.status]}}</td>
-                            <td>
-                                <a routerLink="./form" [state]=item>
-                                    <i class="material-icons">create</i>
-                                </a>
+                    <tr>
+                        <td>
+                            <img [src]="item.photo" [alt]="item.photo" class="logoInTable">
+                        </td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.city}}</td>
+                        <td>{{item.department}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.description}}</td>
+                        <td>{{StatusEnum[item.status]}}</td>
+                        <td>
+                            <a routerLink="./form" [state]=item>
+                                <i class="material-icons">create</i>
+                            </a>
 
-                                <!-- <a href="javascript:void(0)" (click)="deleteItem(item)">
+                            <!-- <a href="javascript:void(0)" (click)="deleteItem(item)">
                                     <i class="material-icons" >delete</i>
                                 </a> -->
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
                     }
                 </ng-template>
                 <ng-template #noItems>

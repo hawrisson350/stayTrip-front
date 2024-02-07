@@ -23,8 +23,6 @@ export class ListComponent extends HandleTables<Hotel> implements OnInit {
     this.httpReqs.get('hotel').subscribe(data => {
       this.dataInTable = data;
     });
-
-    this.alertService.setAlert("horal");
   }
 
 }
