@@ -1,8 +1,8 @@
 <header class="headerMainWrap">
-    <img class="waveTop" src="/assets/img/top-wave.svg" alt="image">
+    <img class="waveTop" src="assets/img/top-wave.svg" alt="image">
     <div class="logoWrap">
-        <img class="blobLeft" src="/assets/img/left-blob.svg" alt="image">
-        <img class="logo" src="/assets/img/logo.svg" alt="image">
+        <img class="blobLeft" src="assets/img/left-blob.svg" alt="image">
+        <img class="logo" src="assets/img/logo.svg" alt="image">
     </div>
     <div class="menuWrap">
         <a routerLink="/home" class="menuItem">
@@ -23,7 +23,7 @@
 
             <a class="menuItem">
                 <i class="material-icons">person</i>
-                <span class="menuDesc">{{this.userInfo?.name}}</span>
+                <span class="menuDesc user">{{this.userInfo?.name}}</span>
             </a>
         }@else{
         <a routerLink="/login" class="menuItem">

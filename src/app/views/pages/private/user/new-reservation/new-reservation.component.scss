@@ -1,15 +1,16 @@
-.formMainWrap{
+.formMainWrap {
     width: 100%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
     &>* {
         max-width: 1200px;
     }
 }
 
-.titleWrap{
+.titleWrap {
     width: 100%;
     display: inline-flex;
     justify-content: center;
@@ -24,6 +25,8 @@
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    width: 100%;
+
     &>* {
         width: 50%;
         min-width: 300px;
@@ -39,6 +42,12 @@
     gap: 30px;
 }
 
-.rowInvalid{
+.rowInvalid {
     background-color: rgb(247, 198, 206);
+}
+
+.lastStep{
+    .cardContent{
+        width: 100% !important;
+    }
 }

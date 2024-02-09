@@ -1,18 +1,19 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Hotel } from '@data/schema/hotel.model';
 import { EmergencyContact, Guest, Reservation } from '@data/schema/reservation.model';
 import { Room } from '@data/schema/room.model';
 import { User } from '@data/schema/user.model';
-import { RoomType, Status } from '@data/schema/utils.enum';
+import { Gender, RoomType, Status, DocumentType } from '@data/schema/utils.enum';
 import { AlertService } from '@data/service/Alert.service';
 import { HttpReqsService } from '@data/service/HttpReqs.service';
 import { SharedModule } from '@shared/shared.module';
 import { first, map } from 'rxjs';
 import { AddGuestComponent } from '../add-guest/add-guest.component';
 import { CurrentUserService } from '@data/service/CurrentUser.service';
+import { ColombiaService } from '@data/service/Colombia.service';
 
 @Component({
   selector: 'st-new-reservation',
@@ -22,6 +23,7 @@ import { CurrentUserService } from '@data/service/CurrentUser.service';
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
+    RouterModule,
     AddGuestComponent],
   templateUrl: './new-reservation.component.html',
   styleUrl: './new-reservation.component.scss'
@@ -30,6 +32,9 @@ export class NewReservationComponent implements OnInit {
 
   StatusEnum: { [key: string]: string } = Status;
   RoomTypeEnum: { [key: string]: string } = RoomType;
+  genderEnum: { [key: string]: string } = Gender;
+  documentTypeEnum: { [key: string]: string } = DocumentType;
+
   hotelSelected: Hotel | null = null;
   roomsList: Room[] = [];
   selectedRooms: any[] = [];
@@ -41,17 +46,12 @@ export class NewReservationComponent implements OnInit {
   emergencyPhone: string = "";
   userInfo: User | null = null;
 
+  activeStep = 0;
 
   formReservation = new FormBuilder().group({
-    id: [{ disabled: true, value: '' }],
     startDate: ['', Validators.required],
     endDate: ['', Validators.required],
-    amountPersons: [0, Validators.required],
-    status: ['A', Validators.required],
-    user: ['', Validators.required],
-    rooms: ['', Validators.required],
-    guests: ['', Validators.required],
-    emergencyContact: ['', Validators.required],
+    amountPersons: [null, Validators.required],
   });
 
   constructor(
@@ -60,6 +60,7 @@ export class NewReservationComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private userService: CurrentUserService,
+    public colombiaService: ColombiaService,
     private alertService: AlertService) {
     userService.user.subscribe(user => {
       this.userInfo = user;
@@ -79,7 +80,7 @@ export class NewReservationComponent implements OnInit {
         history.state.hotel.status
       );
 
-      this.httpReqs.get('room?available=&status=A&hotel=' + this.hotelSelected.id).subscribe(dataRoom => {
+      this.httpReqs.get('room?&status=A&hotel=' + this.hotelSelected.id).subscribe(dataRoom => {
         dataRoom.map((room: any) => {
           const currentRoom = new Room(
             room.id,
@@ -106,15 +107,19 @@ export class NewReservationComponent implements OnInit {
   }
 
   addReservationInfo() {
-    if (!(parseInt(this.formReservation.get('amountPersons')?.value + "")
-      <= this.avaliableRoomByAmountPersons)) {
-
-      this.alertService.setAlert(
-        "Lo sentimos, No tenemos capacidad para las personas ingresadas :'("
-      );
-
+    if (!this.formReservation.valid) {
+      this.formReservation.markAllAsTouched();
     } else {
+      if (!(parseInt(this.formReservation.get('amountPersons')?.value + "")
+        <= this.avaliableRoomByAmountPersons)) {
 
+        this.alertService.setAlert(
+          "<h2>Lo sentimos, No tenemos capacidad para las personas ingresadas </h2>"
+        );
+
+      } else {
+        this.activeStep = 1;
+      }
     }
   }
 
@@ -130,7 +135,7 @@ export class NewReservationComponent implements OnInit {
     let selectedRoomsAmount = 0;
     if (!this.selectedRooms.length) {
       this.alertService.setAlert(
-        "Selecciona al menos una habitación"
+        "<h2>Selecciona al menos una habitación</h2>"
       );
     } else {
       const amountPersonsIngresed = parseInt(this.formReservation.get('amountPersons')?.value + "")
@@ -139,7 +144,7 @@ export class NewReservationComponent implements OnInit {
       });
       if (amountPersonsIngresed > selectedRoomsAmount) {
         this.alertService.setAlert(
-          "La cantidad de personas deber ser menor a la capacidad de las habitaciones seleccionadas"
+          "<h2>La cantidad de personas deber ser menor a la capacidad de las habitaciones seleccionadas</h2>"
         );
       } else {
         this.guestList = [];
@@ -156,6 +161,7 @@ export class NewReservationComponent implements OnInit {
             phone: ''
           });
         }
+        this.activeStep = 2;
       }
     }
   }
@@ -163,6 +169,7 @@ export class NewReservationComponent implements OnInit {
   saveGuestInfo($event: any, index: any) {
     this.selectedGuestForm = null
     this.guestList[index] = $event;
+    this.invalidGuest = null;
   }
 
   addGuests() {
@@ -174,12 +181,21 @@ export class NewReservationComponent implements OnInit {
     });
     if (this.invalidGuest !== null) {
       this.alertService.setAlert(
-        "Por favor ingrese los datos de todos los huespedes"
+        "<h2>Por favor ingrese los datos de todos los huéspedes</h2>"
       );
+    } else {
+      this.activeStep = 3;
     }
   }
 
   addEmergencyInfo() {
+    if (!(this.emergencyName) || !(this.emergencyPhone)) {
+      this.alertService.setAlert(
+        "<h2>Por favor ingrese los datos del contacto de emergencia</h2>"
+      );
+    } else if (this.emergencyName && this.emergencyPhone) {
+      this.activeStep = 4;
+    }
 
   }
 
@@ -201,9 +217,11 @@ export class NewReservationComponent implements OnInit {
 
     this.httpReqs.post('reservation', dataReservation).subscribe({
       next: (next) => {
-        this.alertService.setAlert("Creación Exitosa");
+        this.alertService.setAlert(
+          "<h1>Hemos creado exitosamente tu reserva</h1><p> Recibirás un correo notificando esta información</p>"
+        );
         this.alertService.btnSelected.pipe(first()).subscribe(
-          res => { this.router.navigate(['../'], { relativeTo: this.activeRoute }); }
+          res => { this.router.navigate(['./home'], { relativeTo: this.activeRoute }); }
         );
       },     // nextHandler
       error: (error) => {

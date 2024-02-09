@@ -50,7 +50,7 @@ export class HotelsComponent extends HandleTables<Hotel> implements OnInit {
       this.router.navigate(['/user/new-reservation'], { state: { hotel: item } });
     } else {
       this.alertService.setAlert(
-        "Para crear una reservación debes iniciar sesión "
+        "<h1>Para crear una reservación debes iniciar sesión.</h1>"
       );
       this.alertService.btnSelected.pipe(first()).subscribe(
         res => {

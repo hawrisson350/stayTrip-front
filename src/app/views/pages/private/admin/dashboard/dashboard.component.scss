@@ -1,4 +1,15 @@
-.st-button{
+.adminMenuBtnWraper {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    flex-direction: column;
+}
+
+.st-button {
     height: 100px !important;
     font-size: 2em !important;
+    max-width: 500px;
+    width: 100%;
 }

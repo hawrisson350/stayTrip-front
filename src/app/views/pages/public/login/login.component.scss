@@ -14,8 +14,10 @@
         width: 100%;
         max-width: 900px;
         padding: 15px;
-        border-radius: 15px;
+        border-radius: 0 0 15px 15px;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.01);
+        border:2px solid #d0d0d0;
+        border-top: none;
 
         .formLogin{
             width: 100%;
@@ -33,4 +35,29 @@
     align-items: center;
     margin: 40px 0;
     gap: 30px;
+}
+
+.buttonsWrapHeadWrap {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.01);
+
+    .st-button__lg{
+        width: 50%;
+        font-size: 20px;
+        border-radius: 15px 15px 0 0;
+        box-sizing: content-box;
+        padding: 15px 0;
+        border-bottom:2px solid #d0d0d0;
+    }
+    
+    .st-button__principal{
+        border:2px solid #d0d0d0;
+        border-bottom: none;
+    }
 }

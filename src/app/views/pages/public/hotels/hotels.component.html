@@ -1,9 +1,4 @@
 <div class="hotelTableMainWrap">
-    <div class="titleWrap">
-        <h2>Lista de hoteles</h2>
-    </div>
-
-
     <div class="tableMainWrap">
         <div class="tableActionsWrap">
             <st-form-field>
@@ -24,48 +19,34 @@
                 <i class="material-icons">close</i>
             </button>
         </div>
-        <table cellspacing="0" cellpadding="0">
-            <thead>
-                <tr>
-                    <th>Foto</th>
-                    <th>Nombre</th>
-                    <th>Ciudad</th>
-                    <th>Departamento</th>
-                    <th>Dirección</th>
-                    <th>Descripción</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <ng-container *ngIf="dataInTable.length; then data; else noItems"></ng-container>
-                <ng-template #data>
-                    @for (item of dataInTable; track $index) {
-                    <tr>
-                        <td>
-                            <img [src]="item.photo" [alt]="item.photo" class="logoInTable">
-                        </td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.city}}</td>
-                        <td>{{this.colombiaService.getDepartmentbyId(item.department) | async}}</td>
-                        <td>{{item.address}}</td>
-                        <td>{{item.description}}</td>
-                        <td>
-                            <a stButton size="lg" variant="principal" (click)="gotoRoom(item)">
-                                Seleccionar
-                            </a>
-                        </td>
-                    </tr>
-                    }
-                </ng-template>
-                <ng-template #noItems>
-                    <tr>
-                        <td colspan="8" class="void">No hay registros</td>
-                    </tr>
-                </ng-template>
-            </tbody>
-        </table>
+        <div class="cardsMainWrap">
+            @if(dataInTable.length){
+            @for (item of dataInTable; track $index) {
+            <div class="cardWrapper">
+                <div class="cardPhoto">
+                    <img [src]="item.photo" [alt]="item.photo">
+                </div>
+                <div class="cardContent">
+                        <h2>{{item.name}}</h2>
+                        <span><b>Ciudad:</b> {{item.city}}</span>
+                        <span><b>Departamento:</b> {{this.colombiaService.getDepartmentbyId(item.department) | async}}</span>
+                        <span><b>Dirección:</b> {{item.address}}</span>
+                        <span><b>Descripción:</b> {{item.description}}</span>
+                </div>
+                <div class="cardAction">
+                    <a stButton size="lg" variant="principal" (click)="gotoRoom(item)">
+                        Seleccionar
+                    </a>
+                </div>
+            </div>
+            }
+            } @else{
+            <h3>
+                No hay registros
+            </h3>
+            }
+        </div>
 
-        
         <div class="tableFooter">
             <div class="textWrap">
                 {{dataInTable.length}} Resultados

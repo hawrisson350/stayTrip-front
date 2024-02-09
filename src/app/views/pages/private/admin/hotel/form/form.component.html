@@ -61,60 +61,49 @@
             <st-error>El campo es requerido</st-error>
         </st-form-field>
     </form>
-
-    <div class="tableMainWrap">
-        <!-- <div class="tableActionsWrap">
-            <button class="buttonNew" stButton size="lg" variant="dark" routerLink="./form">
-                <i class="material-icons">add</i>
-                Agregar habitación</button>
-        </div> -->
-        <table cellspacing="0" cellpadding="0">
-            <thead>
-                <tr>
-                    <th>Costo base</th>
-                    <th>Impuesto</th>
-                    <th>Tipo</th>
-                    <th>Ubicación</th>
-                    <th>Capacidad</th>
-                    <th>Descripción</th>
-                    <th>¿Disponible?</th>
-                    <th>Estado</th>
-                    <th> </th>
-                </tr>
-            </thead>
-            <tbody>
-                <ng-container *ngIf="roomsToEdit.length; then data; else noItems"></ng-container>
-                <ng-template #data>
-                    @for (item of roomsToEdit; track $index) {
+    @if(roomsToEdit.length){
+        <div class="titleWrap">
+            <h1>Lista de habitaciones</h1>
+        </div>
+        <div class="tableMainWrap">
+            <table cellspacing="0" cellpadding="0">
+                <thead>
                     <tr>
-                        <td>{{item.baseCost | currency}}</td>
-                        <td>{{item.taxes}}</td>
-                        <td>{{item.type}}</td>
-                        <td>{{item.location}}</td>
-                        <td>{{item.amountPersons}}</td>
-                        <td>{{item.description}}</td>
-                        <td>{{item.available? 'Si': 'No'}}</td>
-                        <td>{{StatusEnum[item.status]}}</td>
-                        <td>
-                            <!-- <a routerLink="./form" [state]=item>
-                                <i class="material-icons">create</i>
-                            </a> -->
-
-                            <!-- <a href="javascript:void(0)" (click)="deleteItem(item)">
-                                    <i class="material-icons" >delete</i>
-                                </a> -->
-                        </td>
+                        <th>Costo base</th>
+                        <th>Impuesto</th>
+                        <th>Tipo</th>
+                        <th>Ubicación</th>
+                        <th>Capacidad</th>
+                        <th>Descripción</th>
+                        <th>¿Disponible?</th>
+                        <th>Estado</th>
                     </tr>
-                    }
-                </ng-template>
-                <ng-template #noItems>
-                    <tr>
-                        <td colspan="8" class="void">No hay registros</td>
-                    </tr>
-                </ng-template>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="roomsToEdit.length; then data; else noItems"></ng-container>
+                    <ng-template #data>
+                        @for (item of roomsToEdit; track $index) {
+                        <tr>
+                            <td>{{item.baseCost | currency}}</td>
+                            <td>{{item.taxes}}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.location}}</td>
+                            <td>{{item.amountPersons}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.available? 'Si': 'No'}}</td>
+                            <td>{{StatusEnum[item.status]}}</td>
+                        </tr>
+                        }
+                    </ng-template>
+                    <ng-template #noItems>
+                        <tr>
+                            <td colspan="8" class="void">No hay registros</td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+    }
     <div class="buttonsWrap">
         <button stButton size="lg" variant="dark" routerLink="../">Regresar</button>
         <button stButton size="lg" variant="principal" (click)="sendDataHotel()">Enviar</button>

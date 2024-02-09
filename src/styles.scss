@@ -415,6 +415,12 @@ body {
     padding: 0;
 }
 
+h1,
+h2 {
+    font-weight: 900;
+    color: $secondary;
+}
+
 a {
     cursor: pointer;
     text-decoration: none;
@@ -439,7 +445,7 @@ a {
 .tableMainWrap {
     display: inline-flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     overflow-x: auto;
 
@@ -462,10 +468,18 @@ a {
             min-width: 200px;
         }
 
-        .filterBtn{
+        .filterBtn {
             min-width: auto;
             margin-left: 15px;
             margin-top: 5px;
+        }
+
+
+        @media (max-width: 980px) {
+            .st-form-field {
+                max-width: unset;
+                width: 100%;
+            }
         }
     }
 
@@ -496,8 +510,86 @@ a {
 
     td.action {
         text-align: center;
-        a{
+
+        a {
             margin: 0 5px;
+        }
+    }
+}
+
+.cardsMainWrap {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .cardWrapper {
+        width: 100%;
+        display: inline-flex;
+        justify-content: flex-start;
+        align-items: center;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        border-left: 10px solid #196B65;
+        margin: 15px 0;
+        flex-direction: row;
+        background-color: #fff;
+
+        .cardPhoto {
+            width: 200px;
+            height: auto;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 200px;
+                height: auto;
+                max-height: 200px;
+            }
+        }
+
+        .cardContent {
+            width: calc(100% - 400px);
+            height: auto;
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 15px 15px;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            h2,
+            h3 {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            span {
+                width: 50%;
+                margin-bottom: 5px;
+            }
+        }
+
+        .cardAction {
+            width: 200px;
+            height: 100%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 1px solid #efefef;
+            padding: 10px;
+        }
+
+        @media (max-width: 980px) {
+            flex-direction: column;
+
+            &>* {
+                width: 100% !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
         }
     }
 }

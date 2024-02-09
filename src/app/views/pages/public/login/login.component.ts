@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { User } from '@data/schema/user.model';
 import { AlertService } from '@data/service/Alert.service';
 import { CurrentUserService } from '@data/service/CurrentUser.service';
@@ -14,6 +14,7 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     SharedModule
   ],
   templateUrl: './login.component.html',
@@ -61,7 +62,7 @@ export class LoginComponent {
           this.currentUserService.user = currentUser;
 
           if (data[0].role === 1) this.router.navigate(['/admin']);
-          if (data[0].role === 2) this.router.navigate(['/dashboard']);
+          if (data[0].role === 2) this.router.navigate(['/home']);
         } else {
           this.alertService.setAlert("Email o clave erronea, por favor verifique sus datos");
         }

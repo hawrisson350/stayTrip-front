@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Gender, DocumentType } from '@data/schema/utils.enum';
 import { HttpReqsService } from '@data/service/HttpReqs.service';
 import { SharedModule } from '@shared/shared.module';
@@ -12,6 +12,7 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     SharedModule,
     CommonModule,
+    RouterModule,
     ReactiveFormsModule
   ],
   templateUrl: './sing-up.component.html',

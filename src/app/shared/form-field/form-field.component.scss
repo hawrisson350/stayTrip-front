@@ -1,5 +1,5 @@
 %font {
-    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: "Nunito", "Helvetica Neue", sans-serif;
     font-size: 15px;
 }
 
@@ -110,6 +110,7 @@ $disableColor: #999;
     .st-form-field__error {
         @extend %font;
         color: $errorColor;
+        font-size: 12px;
     }
 
     &--error {
