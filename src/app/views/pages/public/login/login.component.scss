@@ -20,6 +20,8 @@
         .formLogin{
             width: 100%;
             max-width: 500px;
+            display: inline-flex;
+            flex-wrap: wrap;
         }
     }
 }

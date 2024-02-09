@@ -1,5 +1,5 @@
 export class User {
-    private _id: number;
+    private _id: string;
     private _name: string;
     private _lastname: string;
     private _birthday: string;
@@ -10,10 +10,9 @@ export class User {
     private _phone: string;
     private _password: string;
     private _role: number;
-    private _reservations: [];
 
 
-    constructor(id: number, name: string, lastname: string, birthday: string, gender: string, documentType: string, documentNumber: string, email: string, phone: string, password: string, role: number, reservations: []) {
+    constructor(id: string, name: string, lastname: string, birthday: string, gender: string, documentType: string, documentNumber: string, email: string, phone: string, password: string, role: number) {
         this._id = id;
         this._name = name;
         this._lastname = lastname;
@@ -25,16 +24,15 @@ export class User {
         this._phone = phone;
         this._password = password;
         this._role = role;
-        this._reservations = reservations;
     }
 
 
 
     /**
      * Getter id
-     * @return {number}
+     * @return {string}
      */
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
@@ -119,18 +117,10 @@ export class User {
     }
 
     /**
-     * Getter reservations
-     * @return {[]}
-     */
-    public get reservations(): [] {
-        return this._reservations;
-    }
-
-    /**
      * Setter id
-     * @param {number} value
+     * @param {string} value
      */
-    public set id(value: number) {
+    public set id(value: string) {
         this._id = value;
     }
 
@@ -218,9 +208,5 @@ export class User {
      * Setter reservations
      * @param {[]} value
      */
-    public set reservations(value: []) {
-        this._reservations = value;
-    }
-
 
 }

@@ -1,4 +1,4 @@
-export class HandleTables <T>{
+export class HandleTables<T>{
     dataSource: T[] = [];
     dataInTable: T[] = [];
     pageSizeList: number[] = [5, 10, 20];
@@ -6,10 +6,10 @@ export class HandleTables <T>{
     searchCriteriaSelected: string = "";
     searchDataSelected: string = "";
 
-    constructor(){}
+    constructor() { }
 
     reseatPaginate() {
-        this.dataInTable = this.dataSource.slice(0, this.pageSelected);
+        this.dataInTable = this.dataSource;
         this.searchCriteriaSelected = "";
         this.searchDataSelected = "";
     }
@@ -18,5 +18,13 @@ export class HandleTables <T>{
     changePageSize($event: any) {
         this.pageSelected = parseInt($event);
         this.dataInTable = this.dataSource.slice(0, this.pageSelected);
+    }
+
+    seachItem(): void {
+        let searchDataSelected: any = this.searchDataSelected;
+        this.dataInTable = this.dataSource.filter(item => {
+            const itemValue = item[this.searchCriteriaSelected as keyof T] + "";
+            return itemValue.toLowerCase().includes(searchDataSelected.toLowerCase());
+        });
     }
 }

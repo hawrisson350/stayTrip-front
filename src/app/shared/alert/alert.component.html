@@ -1,6 +1,6 @@
 <div class="alertMainWrap" *ngIf="this.alertService.show">
     <div class="alertWrap">
-        <div class="alertText">{{this.alertService.text}}</div>
+        <div class="alertText" [innerHTML]="this.alertService.text"></div>
         <div class="alertButtons">
             <button stButton size="lg" variant="dark" (click)="sendEmit('cancel')">Cancelar</button>
             <button stButton size="lg" variant="principal" (click)="sendEmit('acept')">Aceptar</button>

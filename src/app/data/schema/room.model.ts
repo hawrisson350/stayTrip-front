@@ -1,5 +1,5 @@
 export class Room {
-    private _id: number;
+    private _id: string;
     private _baseCost: number;
     private _taxes: number;
     private _type: string;
@@ -8,10 +8,10 @@ export class Room {
     private _description: string;
     private _status: string;
     private _available: boolean;
-    private _hotel: number;
+    private _hotel: string;
 
 
-    constructor(id: number, baseCost: number, taxes: number, type: string, location: string, amountPersons: number, description: string, status: string, available: boolean, hotel: number) {
+    constructor(id: string, baseCost: number, taxes: number, type: string, location: string, amountPersons: number, description: string, status: string, available: boolean, hotel: string) {
         this._id = id;
         this._baseCost = baseCost;
         this._taxes = taxes;
@@ -27,9 +27,9 @@ export class Room {
 
     /**
      * Getter id
-     * @return {number}
+     * @return {string}
      */
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
@@ -99,9 +99,9 @@ export class Room {
 
     /**
      * Getter hotel
-     * @return {number}
+     * @return {string}
      */
-    public get hotel(): number {
+    public get hotel(): string {
         return this._hotel;
     }
 
@@ -109,7 +109,7 @@ export class Room {
      * Setter id
      * @param {number} value
      */
-    public set id(value: number) {
+    public set id(value: string) {
         this._id = value;
     }
 
@@ -179,9 +179,9 @@ export class Room {
 
     /**
      * Setter hotel
-     * @param {number} value
+     * @param {string} value
      */
-    public set hotel(value: number) {
+    public set hotel(value: string) {
         this._hotel = value;
     }
 

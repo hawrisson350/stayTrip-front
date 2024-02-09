@@ -10,22 +10,22 @@
 
         <h1>Inicia sesión</h1>
 
-        <form class="formLogin">
+        <form class="formLogin" [formGroup]="formLogin">
             <st-form-field>
                 <label stLabel for="email">Email</label>
-                <input stInput id="email" type="email">
+                <input stInput id="email" type="email" formControlName="email">
                 <st-error>El campo es requerido</st-error>
             </st-form-field>
 
             <st-form-field>
                 <label stLabel for="password">Clave</label>
-                <input stInput id="password" type="password">
+                <input stInput id="password" type="password" formControlName="password">
                 <st-error>El campo es requerido</st-error>
             </st-form-field>
         </form>
         
         <div class="buttonsWrap">
-            <button stButton size="lg" variant="principal">Ingresar</button>
+            <button stButton size="lg" variant="principal" (click)="login()">Ingresar</button>
         </div>
     </div>
 </div>

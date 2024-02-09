@@ -1,1 +1,85 @@
-<p>form works!</p>
+<div class="formMainWrap">
+    <div class="titleWrap">
+        <h1>Formulario de registro de hoteles</h1>
+    </div>
+
+    <form class="formWrap" [formGroup]="formRoom">
+
+        <st-form-field>
+            <label stLabel for="hotel">Hotel</label>
+            <select stInput id="hotel" formControlName="hotel" name="hotel" id="hotel">
+                <option selected disabled>Seleccione una opción</option>
+                @for (item of this.hotelsList; track $index) {
+                <option [ngValue]="item.id">{{item.name}}</option>
+                }
+            </select>
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="baseCost">Costo base</label>
+            <input stInput id="baseCost" type="text" formControlName="baseCost">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="taxes">Impuesto(%)</label>
+            <input stInput id="taxes" type="text" formControlName="taxes">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="type">Tipo</label>
+            <select stInput id="type" formControlName="type" name="type" id="type">
+                <option selected disabled>Seleccione una opción</option>
+                @for (item of this.RoomTypeEnum | keyvalue; track $index) {
+                <option [ngValue]="item.value">{{item.value}}</option>
+                }
+            </select>
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="location">Ubicación</label>
+            <input stInput id="location" type="text" formControlName="location">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="amountPersons">Capacidad de personas</label>
+            <input stInput id="amountPersons" type="number" formControlName="amountPersons">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="available">¿Disponible?</label>
+            <select stInput id="available" formControlName="available" name="available" id="available">
+                <option selected disabled>Seleccione una opción</option>
+                <option value="true">Si</option>
+                <option value="false">No</option>
+            </select>
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="status">Estado</label>
+            <select stInput id="status" formControlName="status" name="status" id="status">
+                <option selected disabled>Seleccione una opción</option>
+                <option value="A">{{StatusEnum['A']}}</option>
+                <option value="I">{{StatusEnum['I']}}</option>
+            </select>
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="description">Descripción</label>
+            <textarea stInput id="description" type="text" formControlName="description" maxlength="150"></textarea>
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+    </form>
+
+    <div class="buttonsWrap">
+        <button stButton size="lg" variant="dark" routerLink="../">Regresar</button>
+        <button stButton size="lg" variant="principal" (click)="sendDataRoom()">Enviar</button>
+    </div>
+</div>

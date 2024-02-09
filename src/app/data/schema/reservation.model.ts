@@ -1,10 +1,10 @@
-interface EmergencyContact {
+export type EmergencyContact = {
     name: string;
     lastname: string;
     phone: string;
 }
 
-interface Guest {
+export type Guest ={
     name: string;
     lastname: string;
     birthday: string;
@@ -16,17 +16,17 @@ interface Guest {
 }
 
 export class Reservation {
-    private _id: number;
+    private _id: string;
     private _startDate: string;
     private _endDate: string;
     private _status: string;
-    private _user: number;
+    private _user: string;
     private _rooms: number[];
     private _guests: Guest[];
     private _emergencyContact: EmergencyContact;
 
 
-    constructor(id: number, startDate: string, endDate: string, status: string, user: number, rooms: number[], guests: Guest[], emergencyContact: EmergencyContact) {
+    constructor(id: string, startDate: string, endDate: string, status: string, user: string, rooms: number[], guests: Guest[], emergencyContact: EmergencyContact) {
         this._id = id;
         this._startDate = startDate;
         this._endDate = endDate;
@@ -40,9 +40,9 @@ export class Reservation {
 
     /**
      * Getter id
-     * @return {number}
+     * @return {string}
      */
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
@@ -72,9 +72,9 @@ export class Reservation {
 
     /**
      * Getter user
-     * @return {number}
+     * @return {string}
      */
-    public get user(): number {
+    public get user(): string {
         return this._user;
     }
 
@@ -104,9 +104,9 @@ export class Reservation {
 
     /**
      * Setter id
-     * @param {number} value
+     * @param {string} value
      */
-    public set id(value: number) {
+    public set id(value: string) {
         this._id = value;
     }
 
@@ -136,9 +136,9 @@ export class Reservation {
 
     /**
      * Setter user
-     * @param {number} value
+     * @param {string} value
      */
-    public set user(value: number) {
+    public set user(value: string) {
         this._user = value;
     }
 

@@ -1,35 +1,38 @@
-import { Room } from "./room.model";
-
 export class Hotel {
-    private _id: number;
+    private _id: string;
     private _name: string;
     private _city: string;
     private _department: number;
     private _address: string;
     private _description: string;
-    private _rooms: Room[];
     private _photo: string;
     private _status: string;
 
 
-    constructor(id: number, name: string, city: string, department: number, address: string, description: string, rooms: Room[], photo: string, status: string) {
+    constructor(
+        id: string,
+        name: string,
+        city: string,
+        department: number,
+        address: string,
+        description: string,
+        photo: string,
+        status: string) {
         this._id = id;
         this._name = name;
         this._city = city;
         this._department = department;
         this._address = address;
         this._description = description;
-        this._rooms = rooms;
         this._photo = photo;
         this._status = status;
     }
-
 
     /**
      * Getter id
      * @return {number}
      */
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
@@ -74,14 +77,6 @@ export class Hotel {
     }
 
     /**
-     * Getter rooms
-     * @return {Room[]}
-     */
-    public get rooms(): Room[] {
-        return this._rooms;
-    }
-
-    /**
      * Getter photo
      * @return {string}
      */
@@ -101,7 +96,7 @@ export class Hotel {
      * Setter id
      * @param {number} value
      */
-    public set id(value: number) {
+    public set id(value: string) {
         this._id = value;
     }
 
@@ -143,14 +138,6 @@ export class Hotel {
      */
     public set description(value: string) {
         this._description = value;
-    }
-
-    /**
-     * Setter rooms
-     * @param {Room[]} value
-     */
-    public set rooms(value: Room[]) {
-        this._rooms = value;
     }
 
     /**

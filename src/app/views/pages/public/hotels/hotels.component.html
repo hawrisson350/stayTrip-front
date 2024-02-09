@@ -1,24 +1,20 @@
 <div class="hotelTableMainWrap">
     <div class="titleWrap">
-        <h1>Lista de hoteles</h1>
+        <h2>Lista de hoteles</h2>
     </div>
 
 
     <div class="tableMainWrap">
         <div class="tableActionsWrap">
-            <button class="buttonNew" stButton size="lg" variant="principal" routerLink="./form">Agregar hotel</button>
-        </div>
-        <!-- <div class="tableActionsWrap">
             <st-form-field>
-                <input stInput id="id" [type]="typeInput" placeholder="Ingrese su busqueda" [(ngModel)]="searchDataSelected">
+                <input stInput id="id" type="text" placeholder="Ingrese su busqueda" [(ngModel)]="searchDataSelected">
             </st-form-field>
             <st-form-field>
                 <select stInput name="select" [(ngModel)]="searchCriteriaSelected">
                     <option value="">Selecciona un criterio</option>
-                    <option value="$name">Nombre</option>
-                    <option value="$description">Descripción</option>
-                    <option value="$date_release">Fecha de liberación</option>
-                    <option value="$date_revision">Fecha de reestructuración</option>
+                    <option value="name">Nombre</option>
+                    <option value="city">Ciudad</option>
+                    <option value="department">Departamento</option>
                 </select>
             </st-form-field>
             <button class="filterBtn" stButton size="lg" variant="principal" (click)="seachItem()" [disabled]="searchCriteriaSelected ==='' || searchDataSelected===''">
@@ -27,7 +23,7 @@
             <button class="filterBtn" stButton size="lg" variant="dark" (click)="reseatPaginate()">
                 <i class="material-icons">close</i>
             </button>
-        </div> -->
+        </div>
         <table cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
@@ -37,7 +33,6 @@
                     <th>Departamento</th>
                     <th>Dirección</th>
                     <th>Descripción</th>
-                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -54,14 +49,9 @@
                         <td>{{this.colombiaService.getDepartmentbyId(item.department) | async}}</td>
                         <td>{{item.address}}</td>
                         <td>{{item.description}}</td>
-                        <td>{{StatusEnum[item.status]}}</td>
-                        <td class="action">
-                            <a routerLink="./form" [state]=item>
-                                <i class="material-icons">create</i>
-                            </a>
-
-                            <a href="javascript:void(0)" (click)="deleteItem(item)">
-                                <i class="material-icons">delete</i>
+                        <td>
+                            <a stButton size="lg" variant="principal" (click)="gotoRoom(item)">
+                                Seleccionar
                             </a>
                         </td>
                     </tr>
@@ -74,6 +64,8 @@
                 </ng-template>
             </tbody>
         </table>
+
+        
         <div class="tableFooter">
             <div class="textWrap">
                 {{dataInTable.length}} Resultados

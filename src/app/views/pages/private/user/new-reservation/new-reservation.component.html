@@ -1,0 +1,170 @@
+{{hotelSelected | json}}
+
+<div class="formMainWrap">
+    <div class="titleWrap">
+        <h3>Detalle de reserva</h3>
+    </div>
+
+    <form class="formWrap" [formGroup]="formReservation">
+        <st-form-field>
+            <label stLabel for="startDate">Fecha de inicio</label>
+            <input stInput id="startDate" type="date" formControlName="startDate">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="endDate">Fecha de fin</label>
+            <input stInput id="endDate" type="date" formControlName="endDate">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="amountPersons">Cantidad de personas</label>
+            <input stInput id="amountPersons" type="number" formControlName="amountPersons">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+    </form>
+
+    <div class="buttonsWrap">
+        <button stButton size="lg" variant="dark" routerLink="../">Regresar</button>
+        <button stButton size="lg" variant="principal" (click)="addReservationInfo()">Selecciona habitaciones</button>
+    </div>
+
+    <div class="tableMainWrap">
+        <div class="titleWrap">
+            <h3>Lista de habitaciones</h3>
+        </div>
+        <table cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th> - </th>
+                    <th>Costo base</th>
+                    <th>Impuesto</th>
+                    <th>Tipo</th>
+                    <th>Ubicación</th>
+                    <th>Capacidad</th>
+                    <th>Descripción</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="roomsList.length; then data; else noItems"></ng-container>
+                <ng-template #data>
+                    @for (item of roomsList; track $index) {
+                    <tr>
+                        <td>
+                            <input id="rooms" type="checkbox" (change)="addRoomItem($event,item)">
+                        </td>
+                        <td>{{item.baseCost | currency}}</td>
+                        <td>{{item.taxes}}</td>
+                        <td>{{item.type}}</td>
+                        <td>{{item.location}}</td>
+                        <td>{{item.amountPersons}}</td>
+                        <td>{{item.description}}</td>
+                    </tr>
+                    }
+                </ng-template>
+                <ng-template #noItems>
+                    <tr>
+                        <td colspan="8" class="void">No hay registros</td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="buttonsWrap">
+        <button stButton size="lg" variant="dark" routerLink="../">Regresar</button>
+        <button stButton size="lg" variant="principal" (click)="addRooms()">Añadir habitaciones</button>
+    </div>
+
+    <div class="tableMainWrap">
+        <div class="titleWrap">
+            <h3>Lista de pasajeros</h3>
+        </div>
+        <table cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Genero</th>
+                    <th>Tipo de documento</th>
+                    <th>Número de documento</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="this.guestList?.length; then data2; else noItems"></ng-container>
+                <ng-template #data2>
+                    @for (item of this.guestList; track $index) {
+                    <tr [ngClass]="this.invalidGuest==$index?'rowInvalid':''">
+                        <td>{{item.name?item.name:'-'}}</td>
+                        <td>{{item.lastname?item.lastname:'-'}}</td>
+                        <td>{{item.birthday?item.birthday:'-'}}</td>
+                        <td>{{item.gender?item.gender:'-'}}</td>
+                        <td>{{item.documentType?item.documentType:'-'}}</td>
+                        <td>{{item.documentNumber?item.documentNumber:'-'}}</td>
+                        <td>{{item.email?item.email:'-'}}</td>
+                        <td>{{item.phone?item.phone:'-'}}</td>
+                        <td>
+                            <button stButton size="lg" variant="dark" (click)="this.selectedGuestForm=$index">Editar información</button>
+                        </td>
+                    </tr>
+                    @if(this.selectedGuestForm===$index){
+                    <tr>
+                        <td colspan="9">
+                            <st-add-guest [guest]="item" (currentGuest)="saveGuestInfo($event,$index)"></st-add-guest>
+                        </td>
+                    </tr>
+                    }
+                    }
+                </ng-template>
+                <ng-template #noItems>
+                    <tr>
+                        <td colspan="8" class="void">No hay registros</td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="buttonsWrap">
+        <button stButton size="lg" variant="dark" routerLink="../">Regresar</button>
+        <button stButton size="lg" variant="principal" (click)="addGuests()">Confirmar huéspedes</button>
+    </div>
+
+
+    <div class="titleWrap">
+        <h3>Contacto de emergencia</h3>
+    </div>
+
+    <form class="formWrap">
+        <st-form-field>
+            <label stLabel for="emergencyName">Nombre completo</label>
+            <input stInput id="emergencyName" type="text" [(ngModel)]="emergencyName" [ngModelOptions]="{standalone: true}">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="emergencyPhone">Teléfono</label>
+            <input stInput id="emergencyPhone" type="text" [(ngModel)]="emergencyPhone" [ngModelOptions]="{standalone: true}">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+    </form>
+
+    <div class="buttonsWrap">
+        <button stButton size="lg" variant="dark" routerLink="../">Regresar</button>
+        <button stButton size="lg" variant="principal" (click)="addEmergencyInfo()">Agregar contacto</button>
+    </div>
+
+    confirmacion XDDDDDDDDDDDDDDD
+
+    <div class="buttonsWrap">
+        <button stButton size="lg" variant="dark" routerLink="../">Regresar</button>
+        <button stButton size="lg" variant="principal" (click)="sendDataReservation()">Confirmar reserva</button>
+    </div>
+
+</div>

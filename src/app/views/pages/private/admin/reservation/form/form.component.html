@@ -1,1 +1,169 @@
-<p>form works!</p>
+<div class="formMainWrap">
+    <div class="titleWrap">
+        <h1>Formulario de reserva</h1>
+    </div>
+
+    <form class="formWrap" [formGroup]="formReservation">
+
+        <st-form-field>
+            <label stLabel for="startDate">Fecha de inicio</label>
+            <input stInput id="startDate" type="date" formControlName="startDate">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="endDate">Fecha de fin</label>
+            <input stInput id="endDate" type="date" formControlName="endDate">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+
+        <st-form-field>
+            <label stLabel for="endDate">Fecha de fin</label>
+            <input stInput id="endDate" type="date" formControlName="endDate">
+            <st-error>El campo es requerido</st-error>
+        </st-form-field>
+    </form>
+
+    <div class="tableMainWrap">
+        <div class="titleWrap">
+            <h3>Lista de habitaciones</h3>
+        </div>
+        <table cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>Costo base</th>
+                    <th>Impuesto</th>
+                    <th>Tipo</th>
+                    <th>Ubicación</th>
+                    <th>Capacidad</th>
+                    <th>Descripción</th>
+                    <th>¿Disponible?</th>
+                    <th>Estado</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="roomsList.length; then data; else noItems"></ng-container>
+                <ng-template #data>
+                    @for (item of roomsList; track $index) {
+                    <tr>
+                        <td>{{item.baseCost | currency}}</td>
+                        <td>{{item.taxes}}</td>
+                        <td>{{item.type}}</td>
+                        <td>{{item.location}}</td>
+                        <td>{{item.amountPersons}}</td>
+                        <td>{{item.description}}</td>
+                        <td>{{item.available? 'Si': 'No'}}</td>
+                        <td>{{StatusEnum[item.status]}}</td>
+                        <td>
+                            <!-- <a routerLink="./form" [state]=item>
+                                    <i class="material-icons">create</i>
+                                </a> -->
+
+                            <!-- <a href="javascript:void(0)" (click)="deleteItem(item)">
+                                        <i class="material-icons" >delete</i>
+                                    </a> -->
+                        </td>
+                    </tr>
+                    }
+                </ng-template>
+                <ng-template #noItems>
+                    <tr>
+                        <td colspan="8" class="void">No hay registros</td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tableMainWrap">
+        <div class="titleWrap">
+            <h3>Usuario</h3>
+        </div>
+        <table cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Genero</th>
+                    <th>Tipo de documento</th>
+                    <th>Número de documento</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="userReservation.length; then data1; else noItems"></ng-container>
+                <ng-template #data1>
+                    @for (item of userReservation; track $index) {
+                    <tr>
+                        <td>{{item.name}}</td>
+                        <td>{{item.lastname}}</td>
+                        <td>{{item.birthday}}</td>
+                        <td>{{item.gender}}</td>
+                        <td>{{item.documentType}}</td>
+                        <td>{{item.documentNumber}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                    </tr>
+                    }
+                </ng-template>
+                <ng-template #noItems>
+                    <tr>
+                        <td colspan="8" class="void">No hay registros</td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tableMainWrap">
+        <div class="titleWrap">
+            <h3>Lista de pasajeros</h3>
+        </div>
+        <table cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Genero</th>
+                    <th>Tipo de documento</th>
+                    <th>Número de documento</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="this.reservationToEdit?.guests?.length; then data2; else noItems"></ng-container>
+                <ng-template #data2>
+                    @for (item of this.reservationToEdit.guests; track $index) {
+                    <tr>
+                        <td>{{item.name}}</td>
+                        <td>{{item.lastname}}</td>
+                        <td>{{item.birthday}}</td>
+                        <td>{{item.gender}}</td>
+                        <td>{{item.documentType}}</td>
+                        <td>{{item.documentNumber}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                    </tr>
+                    }
+                </ng-template>
+                <ng-template #noItems>
+                    <tr>
+                        <td colspan="8" class="void">No hay registros</td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="buttonsWrap">
+        <button stButton size="lg" variant="dark" routerLink="../">Regresar</button>
+        <button stButton size="lg" variant="principal" (click)="sendDataReservation()">Enviar</button>
+    </div>
+</div>

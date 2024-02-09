@@ -5,9 +5,31 @@
         <img class="logo" src="/assets/img/logo.svg" alt="image">
     </div>
     <div class="menuWrap">
-        <a href="/login" class="menuItem">
+        <a routerLink="/home" class="menuItem">
+            <i class="material-icons">home</i>
+            <span class="menuDesc">Inicio</span>
+        </a>
+        @if (this.userService.isLoggedIn()){
+            @if (this.userInfo?.role===1){
+                <a routerLink="/admin" class="menuItem">
+                    <i class="material-icons">manage_accounts</i>
+                    <span class="menuDesc">Dashboard</span>
+                </a>
+            }
+            <a (click)="logOut()" class="menuItem">
+                <i class="material-icons">logout</i>
+                <span class="menuDesc">Salir</span>
+            </a>
+
+            <a class="menuItem">
+                <i class="material-icons">person</i>
+                <span class="menuDesc">{{this.userInfo?.name}}</span>
+            </a>
+        }@else{
+        <a routerLink="/login" class="menuItem">
             <i class="material-icons">login</i>
             <span class="menuDesc">Inicie sesión</span>
         </a>
+        }
     </div>
 </header>

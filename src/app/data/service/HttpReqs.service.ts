@@ -24,6 +24,6 @@ export class HttpReqsService {
   }
 
   public delete(endpoint: string, id: any) {
-    return this.http.delete(environment.api + endpoint + +id);
+    return this.http.delete(environment.api + endpoint + "/" + id);
   }
 }

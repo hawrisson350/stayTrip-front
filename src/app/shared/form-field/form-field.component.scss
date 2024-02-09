@@ -4,7 +4,7 @@
 }
 
 $primary: #FFDD00;
-$secondary: #1B2D54;
+$secondary: #1E2C3A;
 $errorColor: #B00020;
 $successColor: #03DAC6;
 $darkColor: #0D0D0D;
@@ -17,6 +17,7 @@ $disableColor: #999;
     display: inline-block;
     min-width: 200px;
     width: 100%;
+    height: 100px;
 
     &__container {
         position: relative;
@@ -34,7 +35,7 @@ $disableColor: #999;
         color: $darkColor;
         font-size: 16px;
         font-weight: 400;
-        padding: 10px 0;
+        padding-bottom: 10px;
         pointer-events: none;
     }
 
@@ -72,7 +73,7 @@ $disableColor: #999;
             5px 5px,
             1px 1.5em;
         background-repeat: no-repeat;
-        color: grey;
+        color: $darkColor;
     }
 
     &--selected {

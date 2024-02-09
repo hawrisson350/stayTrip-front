@@ -1,6 +1,6 @@
 <div class="formMainWrap">
     <div class="titleWrap">
-        <h1>Formulario de registro</h1>
+        <h1>Formulario de registro de hoteles</h1>
     </div>
 
     <form class="formWrap" [formGroup]="formHotel">
@@ -40,8 +40,8 @@
         </st-form-field>
 
         <st-form-field>
-            <label stLabel for="photo">Foto</label>
-            <input stInput id="photo" type="text" formControlName="photo">
+            <label stLabel for="photo">URL de Foto</label>
+            <input stInput id="photo" type="text" formControlName="photo" maxlength="150">
             <st-error>El campo es requerido</st-error>
         </st-form-field>
 
@@ -62,11 +62,13 @@
         </st-form-field>
     </form>
 
-    <div class="tableMainWrap" cellspacing="0" cellpadding="0">
-        <div class="tableActionsWrap">
-            <button class="buttonNew" stButton size="lg" variant="principal" routerLink="./form">Agregar habitación</button>
-        </div>
-        <table>
+    <div class="tableMainWrap">
+        <!-- <div class="tableActionsWrap">
+            <button class="buttonNew" stButton size="lg" variant="dark" routerLink="./form">
+                <i class="material-icons">add</i>
+                Agregar habitación</button>
+        </div> -->
+        <table cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
                     <th>Costo base</th>
@@ -107,7 +109,7 @@
                 </ng-template>
                 <ng-template #noItems>
                     <tr>
-                        <td colspan="6" class="void">No hay registros</td>
+                        <td colspan="8" class="void">No hay registros</td>
                     </tr>
                 </ng-template>
             </tbody>

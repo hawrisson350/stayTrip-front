@@ -1,15 +1,11 @@
-
 <div class="singUpMainWrap">
-    <div class="buttonsWrap">
-        <a stButton size="lg" variant="principal">Registrarse</a>
-        <a stButton size="lg" variant="dark" href="login">Ingresar</a>
-    </div>
+
 
     <div class="singUpFormWrapper">
 
-        <h1>Regístrese</h1>
+        <h1>Agregar huésped</h1>
 
-        <form class="formsingUp" [formGroup]="formSingUp">
+        <form class="formsingUp" [formGroup]="formGuest">
 
             <st-form-field>
                 <label stLabel for="name">Nombres</label>
@@ -68,22 +64,10 @@
                 <input stInput id="phone" type="phone" formControlName="phone">
                 <st-error>El campo es requerido</st-error>
             </st-form-field>
-
-            <st-form-field>
-                <label stLabel for="password">Clave</label>
-                <input stInput id="password" type="password" formControlName="password">
-                <st-error>El campo es requerido</st-error>
-            </st-form-field>
-
-            <st-form-field>
-                <label stLabel for="confirmPassword">Confirmar clave</label>
-                <input stInput id="confirmPassword" type="password" formControlName="confirmPassword">
-                <st-error>El campo es requerido</st-error>
-            </st-form-field>
         </form>
         
         <div class="buttonsWrap">
-            <button stButton size="lg" variant="principal" (click)="singUp()">Registrarse</button>
+            <button stButton size="lg" variant="principal" (click)="saveGuest()">Agregar huésped</button>
         </div>
     </div>
 </div>

@@ -33,4 +33,13 @@ export class ColombiaService {
         );
     }
 
+    getDepartmentbyId(departmentId: any): Observable<string> {
+        return this.Colombia.pipe(
+            map(colombia => {
+                const findDepartment = colombia.find(item => item.id === departmentId);
+                return findDepartment ? findDepartment.departamento : '';
+            })
+        );
+    }
+
 }
